@@ -1,11 +1,7 @@
-# f5_tools
+Collection of tools used to various f5 functions
 
-# Ansible playbook to import F5 BIG-IQ device inventory to Ansible INI inventory
-
-# fetches bigiq device list via api, 
-# creates ansible ini inventory file with some header info
-# and adds bigiq devices
-
-# header information includes date/time and source hostname/IP
+bigiq_inv.yml - Imports bigiq device list to ansible ini inventory
+ansible_import_bigiq_devices.py - Python script to create to create Ansible INI inventory file
+  - Not super clean, it's tested with static variables but needs the args worked out for robustness
 
 Ben Gordon 
