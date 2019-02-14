@@ -1,0 +1,7 @@
+usage: api_2call_localcommands.py [-h] [-bigip BIGIP] [-user USER] [-cmd CMD] [-interactive]
+
+This tool is used to send bash/tmsh commands to an f5 via api
+
+optional arguments: -h, --help show this help message and exit -bigip BIGIP IP or hostname of BIG-IP Management or Self IP -user USER username to use for authentication -cmd CMD bash or tmsh command to execute -interactive prompts for necessary information if not passed as parameters
+
+By: Ben Gordon (bgordon@f5.com)
