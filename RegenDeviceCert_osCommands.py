@@ -25,22 +25,25 @@ days = 3650  # 10 years
 C = "US"  # Country
 # ST = "TN"   # State		# decided not to use
 # L = "Nashville" # City/Locality	# decided not to use
-O = "F5"  # Organization
+O = "f5"  # Organization
 OU = "IT"  # Division
 CN = gethostname()  # Sets Common Name as hostname
-
-
 key = "rsa:2048"
 keyname = "server.key"  # default for now
 certname = "server.crt"   # default for now
 guicertlocation = "/config/httpd/conf/ssl.crt/"
 guikeylocation = "/config/httpd/conf/ssl.key/"
-
 fullcert = "%s%s" % (guicertlocation, certname)
 fullkey = "%s%s" % (guikeylocation, keyname)
+liclocation = "/config/bigip.license"
 
 
 def main():
+    # Check for default cert/key and license files
+    # to confirm this is actually a bigip
+    if not (os.path.exists(fullcert) or os.path.exists(fullkey) or os.path.exists(liclocation)):
+        sys.exit(' *****  Not a BIG-IP, EXITING!!!  ***** ')
+
     print ("\n---   Updating Device Certificate to hostname   ---")
     print ("    hostname: %s\n" % CN)
     backuporiginalcertkey(fullkey, fullcert)
