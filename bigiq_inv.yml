@@ -41,8 +41,8 @@
       create: yes
     loop:
       - "\n"
-      - "Ansible inventory imported from {{ inventory_hostname }} @ {{ ansible_host }}"
-      - "Imported on {{ ansible_date_time.iso8601 }}"
+      - "# Ansible inventory imported from {{ inventory_hostname }} @ {{ ansible_host }}"
+      - "# Imported on {{ ansible_date_time.iso8601 }}"
       - "\n"
       - "[bigiq_devices]"
 
