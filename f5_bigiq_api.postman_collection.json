@@ -1,0 +1,2883 @@
+{
+	"info": {
+		"_postman_id": "4deb3199-884e-436b-b2b2-399a77edcbdd",
+		"name": "f5_bigiq_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "bigiq list managed devices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/shared/resolver/device-groups/cm-bigip-allDevices/devices?$select=hostname,managementAddress,uuid",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"shared",
+						"resolver",
+						"device-groups",
+						"cm-bigip-allDevices",
+						"devices"
+					],
+					"query": [
+						{
+							"key": "$select",
+							"value": "hostname,managementAddress,uuid"
+						}
+					]
+				},
+				"description": "list bigiq managed bigips filtering on hostname, managementAddress and uuid\n\nuuid is used to execute tasks against devices, like collectins ucs and executing scripts"
+			},
+			"response": [
+				{
+					"name": "bigiq list managed devices",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/shared/resolver/device-groups/cm-bigip-allDevices/devices?$select=hostname,managementAddress,uuid",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"resolver",
+								"device-groups",
+								"cm-bigip-allDevices",
+								"devices"
+							],
+							"query": [
+								{
+									"key": "$select",
+									"value": "hostname,managementAddress,uuid"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 27 Mar 2019 17:08:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "567"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"items\": [\n        {\n            \"hostname\": \"bigip32.f5.com\",\n            \"managementAddress\": \"192.168.200.32\",\n            \"uuid\": \"056ede26-b9a8-4c1c-9850-c1241b8220ae\"\n        },\n        {\n            \"hostname\": \"bigiq01.f5.com\",\n            \"managementAddress\": \"192.168.200.30\",\n            \"uuid\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\"\n        },\n        {\n            \"hostname\": \"bigip31.f5.com\",\n            \"managementAddress\": \"192.168.200.31\",\n            \"uuid\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n        }\n    ],\n    \"generation\": 2,\n    \"kind\": \"shared:resolver:device-groups:devicegroupdevicecollectionstate\",\n    \"lastUpdateMicros\": 1553202161878487,\n    \"selfLink\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allDevices/devices\"\n}"
+				}
+			]
+		},
+		{
+			"name": "bigiq capture bigip ucs - documented way",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"includePrivateKeys\": true,\r\n\"isEncrypted\": false,\r\n\"deviceReference\": {\r\n\"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\r\n},\r\n\"backupLifeTime\": 1,\r\n\"name\": \"bigip31_3_unencryptedBackupWithKeys.ucs\",\r\n\"description\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/system/backup-restore",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"system",
+						"backup-restore"
+					]
+				},
+				"description": "This is the documented api to tell bigiq to capture a ucs of specified device.\n\nFrom:  https://devcentral.f5.com/wiki/iControl.Backup_and_restore_resource.ashx\n\n\"name\" will set the exact name for ucs"
+			},
+			"response": [
+				{
+					"name": "bigiq capture bigip ucs - documented way",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"includePrivateKeys\": true,\r\n\"isEncrypted\": false,\r\n\"deviceReference\": {\r\n\"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\r\n},\r\n\"backupLifeTime\": 1,\r\n\"name\": \"bigip31_3_unencryptedBackupWithKeys.ucs\",\r\n\"description\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/cm/system/backup-restore",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"cm",
+								"system",
+								"backup-restore"
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 27 Mar 2019 17:18:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "920"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"backupLifeTime\": 1,\n    \"expirationDateTime\": \"2019-03-28T12:18:00.049-0500\",\n    \"deviceReference\": {\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n    },\n    \"includePrivateKeys\": true,\n    \"isEncrypted\": false,\n    \"ownerId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n    \"ownerUri\": \"https://192.168.200.30:443\",\n    \"refererReference\": {\n        \"link\": \"192.168.200.100\"\n    },\n    \"id\": \"6eb69016-14be-4cf5-b5bd-dcf7685fd49a\",\n    \"status\": \"STARTED\",\n    \"name\": \"bigip31_3_unencryptedBackupWithKeys.ucs\",\n    \"description\": \"\",\n    \"userReference\": {\n        \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n    },\n    \"identityReferences\": [\n        {\n            \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n        }\n    ],\n    \"taskWorkerGeneration\": 1,\n    \"generation\": 1,\n    \"lastUpdateMicros\": 1553707080048888,\n    \"kind\": \"cm:system:backup-restore:ucsbackuprestoretaskstate\",\n    \"selfLink\": \"https://localhost/mgmt/cm/system/backup-restore/6eb69016-14be-4cf5-b5bd-dcf7685fd49a\"\n}"
+				}
+			]
+		},
+		{
+			"name": "bigiq capture bigip ucs - bigiq ui way",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"devicesReference\": {\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices?$filter='product'+eq+'BIG-IP'+and+%28+uuid+eq+'18cb7507-6fdf-4ed2-9c04-55518158b1aa'%29\"\n    },\n    \"taskReference\": {\n        \"link\": \"https://localhost/mgmt/cm/system/backup-restore\"\n    },\n    \"taskBody\": {\n        \"namePrefix\": \"uiway1_\",\n        \"includePrivateKeys\": true,\n        \"isEncrypted\": false,\n        \"backupLifeTime\": 1,\n        \"shouldCreateArchive\": false,\n        \"passphrase\": null,\n        \"obfuscatedPassphrase\": null,\n        \"backupCounter\": null,\n        \"name\": \"realname.ucs\",\n        \"description\": \"bigiq done did it\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/shared/group-task",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"shared",
+						"group-task"
+					]
+				},
+				"description": "Discovered by watching bigiq ui\n\nJust set the \"namePrefix\" and it will append that to the hostname with date/time."
+			},
+			"response": [
+				{
+					"name": "bigiq capture bigip ucs - bigiq ui way",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"devicesReference\": {\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices?$filter='product'+eq+'BIG-IP'+and+%28+uuid+eq+'18cb7507-6fdf-4ed2-9c04-55518158b1aa'%29\"\n    },\n    \"taskReference\": {\n        \"link\": \"https://localhost/mgmt/cm/system/backup-restore\"\n    },\n    \"taskBody\": {\n        \"namePrefix\": \"uiway1_\",\n        \"includePrivateKeys\": true,\n        \"isEncrypted\": false,\n        \"backupLifeTime\": 1,\n        \"shouldCreateArchive\": false,\n        \"passphrase\": null,\n        \"obfuscatedPassphrase\": null,\n        \"backupCounter\": null,\n        \"name\": \"realname.ucs\",\n        \"description\": \"bigiq done did it\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/shared/group-task",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"group-task"
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 27 Mar 2019 17:21:29 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "980"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"devicesReference\": {\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices?$filter='product'+eq+'BIG-IP'+and+%28+uuid+eq+'18cb7507-6fdf-4ed2-9c04-55518158b1aa'%29\"\n    },\n    \"taskReference\": {\n        \"link\": \"https://localhost/mgmt/cm/system/backup-restore\"\n    },\n    \"taskBody\": {\n        \"namePrefix\": \"uiway1_\",\n        \"includePrivateKeys\": true,\n        \"isEncrypted\": false,\n        \"backupLifeTime\": 1,\n        \"shouldCreateArchive\": false,\n        \"name\": \"realname.ucs\",\n        \"description\": \"bigiq done did it\"\n    },\n    \"continueOnError\": false,\n    \"timeoutSeconds\": 0,\n    \"id\": \"b0e9d90a-567d-4a1a-bca6-694046badafe\",\n    \"status\": \"CREATED\",\n    \"userReference\": {\n        \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n    },\n    \"identityReferences\": [\n        {\n            \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n        }\n    ],\n    \"ownerMachineId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n    \"generation\": 1,\n    \"lastUpdateMicros\": 1553707289497654,\n    \"kind\": \"shared:group-task:devicegrouptaskitemstate\",\n    \"selfLink\": \"https://localhost/mgmt/shared/group-task/b0e9d90a-567d-4a1a-bca6-694046badafe\"\n}"
+				}
+			]
+		},
+		{
+			"name": "bigiq capture bigip ucs - bigiq ui way - hostname",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"devicesReference\": {\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices?$filter=hostname+eq+'bigip31.f5.com'\"\n    },\n    \"taskReference\": {\n        \"link\": \"https://localhost/mgmt/cm/system/backup-restore\"\n    },\n    \"taskBody\": {\n        \"namePrefix\": \"uiway2_\",\n        \"includePrivateKeys\": true,\n        \"isEncrypted\": false,\n        \"backupLifeTime\": 1,\n        \"shouldCreateArchive\": false,\n        \"passphrase\": null,\n        \"obfuscatedPassphrase\": null,\n        \"backupCounter\": null,\n        \"name\": \"realname.ucs\",\n        \"description\": \"bigiq done did it\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/shared/group-task",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"shared",
+						"group-task"
+					]
+				},
+				"description": "cleaning up device query string\n\nDiscovered by watching bigiq ui\n\nJust set the \"namePrefix\" and it will append that to the hostname with date/time."
+			},
+			"response": [
+				{
+					"name": "bigiq capture bigip ucs - bigiq ui way - hostname",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"devicesReference\": {\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices?$filter=hostname+eq+'bigip31.f5.com'\"\n    },\n    \"taskReference\": {\n        \"link\": \"https://localhost/mgmt/cm/system/backup-restore\"\n    },\n    \"taskBody\": {\n        \"namePrefix\": \"uiway2_\",\n        \"includePrivateKeys\": true,\n        \"isEncrypted\": false,\n        \"backupLifeTime\": 1,\n        \"shouldCreateArchive\": false,\n        \"passphrase\": null,\n        \"obfuscatedPassphrase\": null,\n        \"backupCounter\": null,\n        \"name\": \"realname.ucs\",\n        \"description\": \"bigiq done did it\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/shared/group-task",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"group-task"
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 27 Mar 2019 17:41:23 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "929"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"devicesReference\": {\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices?$filter=hostname+eq+'bigip31.f5.com'\"\n    },\n    \"taskReference\": {\n        \"link\": \"https://localhost/mgmt/cm/system/backup-restore\"\n    },\n    \"taskBody\": {\n        \"namePrefix\": \"uiway2_\",\n        \"includePrivateKeys\": true,\n        \"isEncrypted\": false,\n        \"backupLifeTime\": 1,\n        \"shouldCreateArchive\": false,\n        \"name\": \"realname.ucs\",\n        \"description\": \"bigiq done did it\"\n    },\n    \"continueOnError\": false,\n    \"timeoutSeconds\": 0,\n    \"id\": \"70271e40-bf1f-4f7d-acdb-bcebf3319c5f\",\n    \"status\": \"CREATED\",\n    \"userReference\": {\n        \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n    },\n    \"identityReferences\": [\n        {\n            \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n        }\n    ],\n    \"ownerMachineId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n    \"generation\": 1,\n    \"lastUpdateMicros\": 1553708483580721,\n    \"kind\": \"shared:group-task:devicegrouptaskitemstate\",\n    \"selfLink\": \"https://localhost/mgmt/shared/group-task/70271e40-bf1f-4f7d-acdb-bcebf3319c5f\"\n}"
+				},
+				{
+					"name": "bigiq capture bigip ucs - bigiq ui way",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"devicesReference\": {\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices?$filter='product'+eq+'BIG-IP'+and+%28+uuid+eq+'18cb7507-6fdf-4ed2-9c04-55518158b1aa'%29\"\n    },\n    \"taskReference\": {\n        \"link\": \"https://localhost/mgmt/cm/system/backup-restore\"\n    },\n    \"taskBody\": {\n        \"namePrefix\": \"uiway1_\",\n        \"includePrivateKeys\": true,\n        \"isEncrypted\": false,\n        \"backupLifeTime\": 1,\n        \"shouldCreateArchive\": false,\n        \"passphrase\": null,\n        \"obfuscatedPassphrase\": null,\n        \"backupCounter\": null,\n        \"name\": \"realname.ucs\",\n        \"description\": \"bigiq done did it\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/shared/group-task",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"group-task"
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 27 Mar 2019 17:21:29 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "980"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"devicesReference\": {\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices?$filter='product'+eq+'BIG-IP'+and+%28+uuid+eq+'18cb7507-6fdf-4ed2-9c04-55518158b1aa'%29\"\n    },\n    \"taskReference\": {\n        \"link\": \"https://localhost/mgmt/cm/system/backup-restore\"\n    },\n    \"taskBody\": {\n        \"namePrefix\": \"uiway1_\",\n        \"includePrivateKeys\": true,\n        \"isEncrypted\": false,\n        \"backupLifeTime\": 1,\n        \"shouldCreateArchive\": false,\n        \"name\": \"realname.ucs\",\n        \"description\": \"bigiq done did it\"\n    },\n    \"continueOnError\": false,\n    \"timeoutSeconds\": 0,\n    \"id\": \"b0e9d90a-567d-4a1a-bca6-694046badafe\",\n    \"status\": \"CREATED\",\n    \"userReference\": {\n        \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n    },\n    \"identityReferences\": [\n        {\n            \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n        }\n    ],\n    \"ownerMachineId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n    \"generation\": 1,\n    \"lastUpdateMicros\": 1553707289497654,\n    \"kind\": \"shared:group-task:devicegrouptaskitemstate\",\n    \"selfLink\": \"https://localhost/mgmt/shared/group-task/b0e9d90a-567d-4a1a-bca6-694046badafe\"\n}"
+				}
+			]
+		},
+		{
+			"name": "bigiq list bigip ucs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/system/backup-restore",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"system",
+						"backup-restore"
+					]
+				},
+				"description": "lists ucs held on bigiq"
+			},
+			"response": [
+				{
+					"name": "bigiq list bigip ucs",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/cm/system/backup-restore",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"cm",
+								"system",
+								"backup-restore"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 27 Mar 2019 17:46:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "12871"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"items\": [\n        {\n            \"archiveFileName\": \"/shared/ucs_backups/uiway1_bigip31.f5.com_20190327122129.ucs\",\n            \"backupLifeTime\": 1,\n            \"backupRestoreStatus\": \"BACKUP_FINISHED\",\n            \"description\": \"bigiq done did it\",\n            \"device\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"deviceReference\": {\n                \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n            },\n            \"endDateTime\": \"2019-03-27T12:21:42.301-0500\",\n            \"errorMessage\": \"\",\n            \"expirationDateTime\": \"2019-03-28T12:21:29.516-0500\",\n            \"generation\": 8,\n            \"id\": \"04f00443-6662-490a-8c93-ce7839d925c0\",\n            \"identityReferences\": [\n                {\n                    \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n                }\n            ],\n            \"includePrivateKeys\": true,\n            \"isEncrypted\": false,\n            \"kind\": \"cm:system:backup-restore:ucsbackuprestoretaskstate\",\n            \"lastUpdateMicros\": 1553707302351843,\n            \"name\": \"uiway1_bigip31.f5.com_20190327122129.ucs\",\n            \"namePrefix\": \"uiway1_\",\n            \"ownerId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n            \"ownerUri\": \"https://192.168.200.30:443\",\n            \"refererReference\": {\n                \"link\": \"http://localhost:8100/shared/group-task\"\n            },\n            \"selfLink\": \"https://localhost/mgmt/cm/system/backup-restore/04f00443-6662-490a-8c93-ce7839d925c0\",\n            \"sourceDevice\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"startDateTime\": \"2019-03-27T12:21:29.522-0500\",\n            \"status\": \"FINISHED\",\n            \"userReference\": {\n                \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n            }\n        },\n        {\n            \"archiveFileName\": \"/shared/ucs_backups/uiway2_bigip31.f5.com_20190327122811.ucs\",\n            \"backupLifeTime\": 1,\n            \"backupRestoreStatus\": \"BACKUP_FINISHED\",\n            \"description\": \"bigiq done did it\",\n            \"device\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"deviceReference\": {\n                \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n            },\n            \"endDateTime\": \"2019-03-27T12:28:23.981-0500\",\n            \"errorMessage\": \"\",\n            \"expirationDateTime\": \"2019-03-28T12:28:11.243-0500\",\n            \"generation\": 8,\n            \"id\": \"8eaa203a-cf7a-4654-8078-0b4e47ea1bc0\",\n            \"identityReferences\": [\n                {\n                    \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n                }\n            ],\n            \"includePrivateKeys\": true,\n            \"isEncrypted\": false,\n            \"kind\": \"cm:system:backup-restore:ucsbackuprestoretaskstate\",\n            \"lastUpdateMicros\": 1553707704031962,\n            \"name\": \"uiway2_bigip31.f5.com_20190327122811.ucs\",\n            \"namePrefix\": \"uiway2_\",\n            \"ownerId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n            \"ownerUri\": \"https://192.168.200.30:443\",\n            \"refererReference\": {\n                \"link\": \"http://localhost:8100/shared/group-task\"\n            },\n            \"selfLink\": \"https://localhost/mgmt/cm/system/backup-restore/8eaa203a-cf7a-4654-8078-0b4e47ea1bc0\",\n            \"sourceDevice\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"startDateTime\": \"2019-03-27T12:28:11.249-0500\",\n            \"status\": \"FINISHED\",\n            \"userReference\": {\n                \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n            }\n        },\n        {\n            \"archiveFileName\": \"/shared/ucs_backups/uiway2_bigip31.f5.com_20190327122521.ucs\",\n            \"backupLifeTime\": 1,\n            \"backupRestoreStatus\": \"BACKUP_FINISHED\",\n            \"description\": \"bigiq done did it\",\n            \"device\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"deviceReference\": {\n                \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n            },\n            \"endDateTime\": \"2019-03-27T12:25:34.731-0500\",\n            \"errorMessage\": \"\",\n            \"expirationDateTime\": \"2019-03-28T12:25:21.953-0500\",\n            \"generation\": 8,\n            \"id\": \"6a910394-47e5-49f0-981a-8897a2ca70b3\",\n            \"identityReferences\": [\n                {\n                    \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n                }\n            ],\n            \"includePrivateKeys\": true,\n            \"isEncrypted\": false,\n            \"kind\": \"cm:system:backup-restore:ucsbackuprestoretaskstate\",\n            \"lastUpdateMicros\": 1553707534782326,\n            \"name\": \"uiway2_bigip31.f5.com_20190327122521.ucs\",\n            \"namePrefix\": \"uiway2_\",\n            \"ownerId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n            \"ownerUri\": \"https://192.168.200.30:443\",\n            \"refererReference\": {\n                \"link\": \"http://localhost:8100/shared/group-task\"\n            },\n            \"selfLink\": \"https://localhost/mgmt/cm/system/backup-restore/6a910394-47e5-49f0-981a-8897a2ca70b3\",\n            \"sourceDevice\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"startDateTime\": \"2019-03-27T12:25:21.956-0500\",\n            \"status\": \"FINISHED\",\n            \"userReference\": {\n                \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n            }\n        },\n        {\n            \"archiveFileName\": \"/shared/ucs_backups/uiway2_bigip31.f5.com_20190327124123.ucs\",\n            \"backupLifeTime\": 1,\n            \"backupRestoreStatus\": \"BACKUP_FINISHED\",\n            \"description\": \"bigiq done did it\",\n            \"device\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"deviceReference\": {\n                \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n            },\n            \"endDateTime\": \"2019-03-27T12:41:36.363-0500\",\n            \"errorMessage\": \"\",\n            \"expirationDateTime\": \"2019-03-28T12:41:23.596-0500\",\n            \"generation\": 8,\n            \"id\": \"c2f9a8f2-138f-499a-8462-8185661e01f4\",\n            \"identityReferences\": [\n                {\n                    \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n                }\n            ],\n            \"includePrivateKeys\": true,\n            \"isEncrypted\": false,\n            \"kind\": \"cm:system:backup-restore:ucsbackuprestoretaskstate\",\n            \"lastUpdateMicros\": 1553708496413966,\n            \"name\": \"uiway2_bigip31.f5.com_20190327124123.ucs\",\n            \"namePrefix\": \"uiway2_\",\n            \"ownerId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n            \"ownerUri\": \"https://192.168.200.30:443\",\n            \"refererReference\": {\n                \"link\": \"http://localhost:8100/shared/group-task\"\n            },\n            \"selfLink\": \"https://localhost/mgmt/cm/system/backup-restore/c2f9a8f2-138f-499a-8462-8185661e01f4\",\n            \"sourceDevice\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"startDateTime\": \"2019-03-27T12:41:23.599-0500\",\n            \"status\": \"FINISHED\",\n            \"userReference\": {\n                \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n            }\n        },\n        {\n            \"archiveFileName\": \"/shared/ucs_backups/bigip31_2_unencryptedBackupWithKeys.ucs\",\n            \"backupLifeTime\": 1,\n            \"backupRestoreStatus\": \"BACKUP_FINISHED\",\n            \"description\": \"\",\n            \"device\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"deviceReference\": {\n                \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n            },\n            \"endDateTime\": \"2019-03-27T12:16:42.677-0500\",\n            \"errorMessage\": \"\",\n            \"expirationDateTime\": \"2019-03-28T12:16:29.922-0500\",\n            \"generation\": 8,\n            \"id\": \"c8f1d4c9-e2ef-4df1-8a01-0ea4f141a50f\",\n            \"identityReferences\": [\n                {\n                    \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n                }\n            ],\n            \"includePrivateKeys\": true,\n            \"isEncrypted\": false,\n            \"kind\": \"cm:system:backup-restore:ucsbackuprestoretaskstate\",\n            \"lastUpdateMicros\": 1553707002727799,\n            \"name\": \"bigip31_2_unencryptedBackupWithKeys.ucs\",\n            \"ownerId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n            \"ownerUri\": \"https://192.168.200.30:443\",\n            \"refererReference\": {\n                \"link\": \"192.168.200.100\"\n            },\n            \"selfLink\": \"https://localhost/mgmt/cm/system/backup-restore/c8f1d4c9-e2ef-4df1-8a01-0ea4f141a50f\",\n            \"sourceDevice\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"startDateTime\": \"2019-03-27T12:16:29.934-0500\",\n            \"status\": \"FINISHED\",\n            \"userReference\": {\n                \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n            }\n        },\n        {\n            \"archiveFileName\": \"/shared/ucs_backups/bigip31_3_unencryptedBackupWithKeys.ucs\",\n            \"backupLifeTime\": 1,\n            \"backupRestoreStatus\": \"BACKUP_FINISHED\",\n            \"description\": \"\",\n            \"device\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"deviceReference\": {\n                \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n            },\n            \"endDateTime\": \"2019-03-27T12:18:12.772-0500\",\n            \"errorMessage\": \"\",\n            \"expirationDateTime\": \"2019-03-28T12:18:00.049-0500\",\n            \"generation\": 8,\n            \"id\": \"6eb69016-14be-4cf5-b5bd-dcf7685fd49a\",\n            \"identityReferences\": [\n                {\n                    \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n                }\n            ],\n            \"includePrivateKeys\": true,\n            \"isEncrypted\": false,\n            \"kind\": \"cm:system:backup-restore:ucsbackuprestoretaskstate\",\n            \"lastUpdateMicros\": 1553707092823183,\n            \"name\": \"bigip31_3_unencryptedBackupWithKeys.ucs\",\n            \"ownerId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n            \"ownerUri\": \"https://192.168.200.30:443\",\n            \"refererReference\": {\n                \"link\": \"192.168.200.100\"\n            },\n            \"selfLink\": \"https://localhost/mgmt/cm/system/backup-restore/6eb69016-14be-4cf5-b5bd-dcf7685fd49a\",\n            \"sourceDevice\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"startDateTime\": \"2019-03-27T12:18:00.055-0500\",\n            \"status\": \"FINISHED\",\n            \"userReference\": {\n                \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n            }\n        },\n        {\n            \"archiveFileName\": \"/shared/ucs_backups/bigip31_unencryptedBackupWithKeys.ucs\",\n            \"backupLifeTime\": 1,\n            \"backupRestoreStatus\": \"BACKUP_FINISHED\",\n            \"description\": \"\",\n            \"device\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"deviceReference\": {\n                \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n            },\n            \"endDateTime\": \"2019-03-27T12:15:49.867-0500\",\n            \"errorMessage\": \"\",\n            \"expirationDateTime\": \"2019-03-28T12:15:37.087-0500\",\n            \"generation\": 8,\n            \"id\": \"13d8dc3f-c216-4d30-a68d-62c8b514b15d\",\n            \"identityReferences\": [\n                {\n                    \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n                }\n            ],\n            \"includePrivateKeys\": true,\n            \"isEncrypted\": false,\n            \"kind\": \"cm:system:backup-restore:ucsbackuprestoretaskstate\",\n            \"lastUpdateMicros\": 1553706949919763,\n            \"name\": \"bigip31_unencryptedBackupWithKeys.ucs\",\n            \"ownerId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n            \"ownerUri\": \"https://192.168.200.30:443\",\n            \"refererReference\": {\n                \"link\": \"192.168.200.100\"\n            },\n            \"selfLink\": \"https://localhost/mgmt/cm/system/backup-restore/13d8dc3f-c216-4d30-a68d-62c8b514b15d\",\n            \"sourceDevice\": {\n                \"deviceUri\": \"https://192.168.200.31:443\",\n                \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                \"address\": \"192.168.200.31\",\n                \"httpsPort\": 443,\n                \"hostname\": \"bigip31.f5.com\",\n                \"version\": \"14.1.0.2\",\n                \"product\": \"BIG-IP\",\n                \"generation\": 0,\n                \"lastUpdateMicros\": 0,\n                \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\"\n            },\n            \"startDateTime\": \"2019-03-27T12:15:37.095-0500\",\n            \"status\": \"FINISHED\",\n            \"userReference\": {\n                \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n            }\n        }\n    ],\n    \"generation\": 66,\n    \"kind\": \"cm:system:backup-restore:ucsbackuprestoretaskcollectionstate\",\n    \"lastUpdateMicros\": 1553708496417079,\n    \"selfLink\": \"https://localhost/mgmt/cm/system/backup-restore\"\n}"
+				}
+			]
+		},
+		{
+			"name": "bigiq list scripts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/shared/user-scripts",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"shared",
+						"user-scripts"
+					]
+				},
+				"description": "lists scripts on bigiq"
+			},
+			"response": [
+				{
+					"name": "bigiq list scripts",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/shared/user-scripts",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"user-scripts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 27 Mar 2019 17:53:47 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1079"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"items\": [\n        {\n            \"id\": \"04b5e68f-14a5-4988-bfed-792f4a1219d7\",\n            \"name\": \"python_gethostname_test\",\n            \"description\": \"small python script to get hostname\",\n            \"script\": \"#!/usr/bin/python\\nfrom socket import gethostname; print gethostname()\",\n            \"generation\": 1,\n            \"lastUpdateMicros\": 1553254273293133,\n            \"kind\": \"shared:user-scripts:userscriptstate\",\n            \"selfLink\": \"https://localhost/mgmt/shared/user-scripts/04b5e68f-14a5-4988-bfed-792f4a1219d7\"\n        },\n        {\n            \"id\": \"4c6a0772-0400-4dcd-8abf-e8d8f3fad4a4\",\n            \"name\": \"force_update_root_admin_pass\",\n            \"description\": \"executes tmsh commands from bash to force update of root/admin passwords\",\n            \"script\": \"tmsh modify auth user admin password f5rocks\\necho -e \\\"f5rocks\\\\nf5rocks\\\" | tmsh modify auth password root\\ntmsh save sys config\",\n            \"generation\": 1,\n            \"lastUpdateMicros\": 1553254346580364,\n            \"kind\": \"shared:user-scripts:userscriptstate\",\n            \"selfLink\": \"https://localhost/mgmt/shared/user-scripts/4c6a0772-0400-4dcd-8abf-e8d8f3fad4a4\"\n        }\n    ],\n    \"generation\": 3,\n    \"kind\": \"shared:user-scripts:userscriptcollectionstate\",\n    \"lastUpdateMicros\": 1553254346581684,\n    \"selfLink\": \"https://localhost/mgmt/shared/user-scripts\"\n}"
+				}
+			]
+		},
+		{
+			"name": "bigip execute script on bigip",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"asdf2\",\n    \"deviceReferences\": [\n        {\n            \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n        }\n    ],\n    \"timeoutInSeconds\": 600,\n    \"scriptReference\": {\n        \"link\": \"https://localhost/mgmt/shared/user-scripts/04b5e68f-14a5-4988-bfed-792f4a1219d7\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/shared/user-script-execution",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"shared",
+						"user-script-execution"
+					]
+				},
+				"description": "executes a script on bigiq on the defined bigip"
+			},
+			"response": [
+				{
+					"name": "dev-bigip execute script on bigip",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"asdf2\",\n    \"deviceReferences\": [\n        {\n            \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n        }\n    ],\n    \"timeoutInSeconds\": 600,\n    \"scriptReference\": {\n        \"link\": \"https://localhost/mgmt/shared/user-scripts/04b5e68f-14a5-4988-bfed-792f4a1219d7\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/shared/user-script-execution",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"user-script-execution"
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 27 Mar 2019 18:04:10 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "815"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"deviceReferences\": [\n        {\n            \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n        }\n    ],\n    \"scriptReference\": {\n        \"link\": \"https://localhost/mgmt/shared/user-scripts/04b5e68f-14a5-4988-bfed-792f4a1219d7\"\n    },\n    \"timeoutInSeconds\": 600,\n    \"id\": \"cfaec593-8f62-46c2-b75c-1205228033a9\",\n    \"status\": \"STARTED\",\n    \"name\": \"asdf2\",\n    \"userReference\": {\n        \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n    },\n    \"identityReferences\": [\n        {\n            \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n        }\n    ],\n    \"ownerMachineId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n    \"taskWorkerGeneration\": 1,\n    \"generation\": 1,\n    \"lastUpdateMicros\": 1553709850549082,\n    \"kind\": \"shared:user-script-execution:userscripttaskstate\",\n    \"selfLink\": \"https://localhost/mgmt/shared/user-script-execution/cfaec593-8f62-46c2-b75c-1205228033a9\"\n}"
+				}
+			]
+		},
+		{
+			"name": "bigip list executed scripts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/shared/user-script-execution",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"shared",
+						"user-script-execution"
+					]
+				},
+				"description": "executes a script on bigiq on the defined bigip"
+			},
+			"response": [
+				{
+					"name": "dev-bigip list executed scripts",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/shared/user-script-execution",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"user-script-execution"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 27 Mar 2019 18:06:20 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2949"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"items\": [\n        {\n            \"currentStep\": \"CLEAN_UP\",\n            \"deviceCount\": 1,\n            \"deviceReferences\": [\n                {\n                    \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n                }\n            ],\n            \"endDateTime\": \"2019-03-27T13:04:30.925-0500\",\n            \"generation\": 7,\n            \"id\": \"cfaec593-8f62-46c2-b75c-1205228033a9\",\n            \"identityReferences\": [\n                {\n                    \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n                }\n            ],\n            \"kind\": \"shared:user-script-execution:userscripttaskstate\",\n            \"lastUpdateMicros\": 1553709870974967,\n            \"name\": \"asdf2\",\n            \"ownerMachineId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n            \"scriptReference\": {\n                \"link\": \"https://localhost/mgmt/shared/user-scripts/04b5e68f-14a5-4988-bfed-792f4a1219d7\"\n            },\n            \"selfLink\": \"https://localhost/mgmt/shared/user-script-execution/cfaec593-8f62-46c2-b75c-1205228033a9\",\n            \"startDateTime\": \"2019-03-27T13:04:10.568-0500\",\n            \"status\": \"FINISHED\",\n            \"timeoutInSeconds\": 600,\n            \"userReference\": {\n                \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n            },\n            \"userScriptTaskStatuses\": [\n                {\n                    \"deviceReference\": {\n                        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n                    },\n                    \"status\": \"FINISHED\",\n                    \"message\": \"Finished executing script.\",\n                    \"hostname\": \"bigip31.f5.com\",\n                    \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                    \"address\": \"192.168.200.31\",\n                    \"httpsPort\": 443,\n                    \"startTime\": 507411695277825,\n                    \"output\": \"bigip31.f5.com\\n\",\n                    \"exitCode\": \"0\"\n                }\n            ],\n            \"username\": \"admin\"\n        },\n        {\n            \"currentStep\": \"CLEAN_UP\",\n            \"deviceCount\": 1,\n            \"deviceReferences\": [\n                {\n                    \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n                }\n            ],\n            \"endDateTime\": \"2019-03-27T13:02:21.128-0500\",\n            \"generation\": 7,\n            \"id\": \"60d2b493-bf9b-4dc3-a631-906284743097\",\n            \"identityReferences\": [\n                {\n                    \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n                }\n            ],\n            \"kind\": \"shared:user-script-execution:userscripttaskstate\",\n            \"lastUpdateMicros\": 1553709741178626,\n            \"name\": \"asdf\",\n            \"ownerMachineId\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\",\n            \"scriptReference\": {\n                \"link\": \"https://localhost/mgmt/shared/user-scripts/04b5e68f-14a5-4988-bfed-792f4a1219d7\"\n            },\n            \"selfLink\": \"https://localhost/mgmt/shared/user-script-execution/60d2b493-bf9b-4dc3-a631-906284743097\",\n            \"startDateTime\": \"2019-03-27T13:02:00.747-0500\",\n            \"status\": \"FINISHED\",\n            \"timeoutInSeconds\": 600,\n            \"userReference\": {\n                \"link\": \"https://localhost/mgmt/shared/authz/users/admin\"\n            },\n            \"userScriptTaskStatuses\": [\n                {\n                    \"deviceReference\": {\n                        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n                    },\n                    \"status\": \"FINISHED\",\n                    \"message\": \"Finished executing script.\",\n                    \"hostname\": \"bigip31.f5.com\",\n                    \"machineId\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\",\n                    \"address\": \"192.168.200.31\",\n                    \"httpsPort\": 443,\n                    \"startTime\": 507282260489506,\n                    \"output\": \"bigip31.f5.com\\n\",\n                    \"exitCode\": \"0\"\n                }\n            ],\n            \"username\": \"admin\"\n        }\n    ],\n    \"generation\": 15,\n    \"kind\": \"shared:user-script-execution:userscripttaskcollectionstate\",\n    \"lastUpdateMicros\": 1553709870977398,\n    \"selfLink\": \"https://localhost/mgmt/shared/user-script-execution\"\n}"
+				}
+			]
+		},
+		{
+			"name": "bigip upload script",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\":\"get_hostname_test2\",\n\"description\":\"good description\",\n\"script\":\"#!/usr/bin/python\\nfrom socket import gethostname; print gethostname()\"\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/shared/user-scripts",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"shared",
+						"user-scripts"
+					]
+				},
+				"description": "upload new script to bigiq"
+			},
+			"response": [
+				{
+					"name": "dev-bigip upload script",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"name\":\"get_hostname_test2\",\n\"description\":\"good description\",\n\"script\":\"#!/usr/bin/python\\nfrom socket import gethostname; print gethostname()\"\n}"
+						},
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/shared/user-scripts",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"user-scripts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 27 Mar 2019 17:55:13 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "377"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"f7d470ca-8fc6-4a2b-aa8a-3d584ca3d2a2\",\n    \"name\": \"get_hostname_test2\",\n    \"description\": \"good description\",\n    \"script\": \"#!/usr/bin/python\\nfrom socket import gethostname; print gethostname()\",\n    \"generation\": 1,\n    \"lastUpdateMicros\": 1553709313168268,\n    \"kind\": \"shared:user-scripts:userscriptstate\",\n    \"selfLink\": \"https://localhost/mgmt/shared/user-scripts/f7d470ca-8fc6-4a2b-aa8a-3d584ca3d2a2\"\n}"
+				}
+			]
+		},
+		{
+			"name": "bigiq list device trust tasks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/global/tasks/device-trust",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"global",
+						"tasks",
+						"device-trust"
+					]
+				},
+				"description": "list bigiq managed bigips filtering on hostname, managementAddress and uuid\n\nuuid is used to execute tasks against devices, like collectins ucs and executing scripts"
+			},
+			"response": [
+				{
+					"name": "bigiq list managed devices",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/shared/resolver/device-groups/cm-bigip-allDevices/devices?$select=hostname,managementAddress,uuid",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"resolver",
+								"device-groups",
+								"cm-bigip-allDevices",
+								"devices"
+							],
+							"query": [
+								{
+									"key": "$select",
+									"value": "hostname,managementAddress,uuid"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 27 Mar 2019 17:08:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "567"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"items\": [\n        {\n            \"hostname\": \"bigip32.f5.com\",\n            \"managementAddress\": \"192.168.200.32\",\n            \"uuid\": \"056ede26-b9a8-4c1c-9850-c1241b8220ae\"\n        },\n        {\n            \"hostname\": \"bigiq01.f5.com\",\n            \"managementAddress\": \"192.168.200.30\",\n            \"uuid\": \"fe8e1dcb-5af4-405c-bbb5-0be3dd03307e\"\n        },\n        {\n            \"hostname\": \"bigip31.f5.com\",\n            \"managementAddress\": \"192.168.200.31\",\n            \"uuid\": \"18cb7507-6fdf-4ed2-9c04-55518158b1aa\"\n        }\n    ],\n    \"generation\": 2,\n    \"kind\": \"shared:resolver:device-groups:devicegroupdevicecollectionstate\",\n    \"lastUpdateMicros\": 1553202161878487,\n    \"selfLink\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allDevices/devices\"\n}"
+				}
+			]
+		},
+		{
+			"name": "bigiq add device",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"address\": \"192.168.200.33\",\n    \"httpsPort\": 443,\n    \"userName\": \"admin\",\n    \"password\": \"benrocks\",\n    \"clusterName\": \"\",\n    \"useBigiqSync\": false,\n    \"deployWhenDscChangesPending\": false,\n    \"name\": \"trust_192.168.200.33\"\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/global/tasks/device-trust",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"global",
+						"tasks",
+						"device-trust"
+					]
+				},
+				"description": "list bigiq managed bigips filtering on hostname, managementAddress and uuid\n\nuuid is used to execute tasks against devices, like collectins ucs and executing scripts"
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq add device status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/global/tasks/device-trust/c69fa403-32e4-4151-9784-5d23103f341b",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"global",
+						"tasks",
+						"device-trust",
+						"c69fa403-32e4-4151-9784-5d23103f341b"
+					]
+				},
+				"description": "list bigiq managed bigips filtering on hostname, managementAddress and uuid\n\nuuid is used to execute tasks against devices, like collectins ucs and executing scripts"
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq discover ltm service",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"moduleList\": [\n        {\n            \"module\": \"adc_core\"\n        }\n    ],\n    \"deviceReference\": {\n        \"link\": \"https://localhost/mgmt/cm/system/machineid-resolver/161aee58-4a49-4d49-9f6c-50ee4082617b\"\n    },\n    \"name\": \"discovery_192.168.200.33\"\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/global/tasks/device-discovery/",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"global",
+						"tasks",
+						"device-discovery",
+						""
+					]
+				},
+				"description": "list bigiq managed bigips filtering on hostname, managementAddress and uuid\n\nuuid is used to execute tasks against devices, like collectins ucs and executing scripts"
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq discover ltm service status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/global/tasks/device-discovery/1f94e4a4-5be6-4eb1-94b9-81c67f734ae5",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"global",
+						"tasks",
+						"device-discovery",
+						"1f94e4a4-5be6-4eb1-94b9-81c67f734ae5"
+					]
+				},
+				"description": "list bigiq managed bigips filtering on hostname, managementAddress and uuid\n\nuuid is used to execute tasks against devices, like collectins ucs and executing scripts"
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq import ltm service",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"createChildTasks\": false,\n    \"skipDiscovery\": true,\n    \"deviceReference\": {\n        \"link\": \"https://localhost/mgmt/cm/system/machineid-resolver/161aee58-4a49-4d49-9f6c-50ee4082617b\"\n    },\n    \"snapshotWorkingConfig\": false,\n    \"useBigiqSync\": false,\n    \"name\": \"import-adc_core_192.168.200.33\"\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/adc-core/tasks/declare-mgmt-authority/",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"adc-core",
+						"tasks",
+						"declare-mgmt-authority",
+						""
+					]
+				},
+				"description": "list bigiq managed bigips filtering on hostname, managementAddress and uuid\n\nuuid is used to execute tasks against devices, like collectins ucs and executing scripts"
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq import ltm service status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/adc-core/tasks/declare-mgmt-authority/0d92d67f-66d5-411f-8fec-7148dc864ab5",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"adc-core",
+						"tasks",
+						"declare-mgmt-authority",
+						"0d92d67f-66d5-411f-8fec-7148dc864ab5"
+					]
+				},
+				"description": "list bigiq managed bigips filtering on hostname, managementAddress and uuid\n\nuuid is used to execute tasks against devices, like collectins ucs and executing scripts"
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq remove device ltm service",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"moduleList\": [\n        {\n            \"module\": \"adc_core\"\n        }\n    ],\n    \"deviceReference\": {\n        \"link\": \"https://localhost/mgmt/cm/system/machineid-resolver/161aee58-4a49-4d49-9f6c-50ee4082617b\"\n    },\n    \"createChildTasks\": true,\n    \"name\": \"device-rma_192.168.200.33\"\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/global/tasks/device-remove-mgmt-authority",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"global",
+						"tasks",
+						"device-remove-mgmt-authority"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq remove device ltm service status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/global/tasks/device-remove-mgmt-authority/c302f9de-f658-415b-b879-2fd6cc5da71e",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"global",
+						"tasks",
+						"device-remove-mgmt-authority",
+						"c302f9de-f658-415b-b879-2fd6cc5da71e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq remove device",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deviceReference\": {\n        \"link\": \"https://localhost/mgmt/cm/system/machineid-resolver/161aee58-4a49-4d49-9f6c-50ee4082617b\"\n    },\n    \"name\": \"device-remove-trust_192.168.200.33\"\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/global/tasks/device-remove-trust",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"global",
+						"tasks",
+						"device-remove-trust"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq remove device status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/global/tasks/device-remove-trust/7db8372e-ebbb-4a5c-a3c6-f51fa564ee1a",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"global",
+						"tasks",
+						"device-remove-trust",
+						"7db8372e-ebbb-4a5c-a3c6-f51fa564ee1a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq list license pools",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/device/licensing/pool/purchased-pool/licenses?$select=name,baseRegKey,uuid,state,state,totalDeviceLicenses",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"device",
+						"licensing",
+						"pool",
+						"purchased-pool",
+						"licenses"
+					],
+					"query": [
+						{
+							"key": "$select",
+							"value": "name,baseRegKey,uuid,state,state,totalDeviceLicenses"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq show license pool detail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/device/licensing/pool/purchased-pool/licenses/ce4d823d-4191-4740-a26c-6f1223878c5c",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"device",
+						"licensing",
+						"pool",
+						"purchased-pool",
+						"licenses",
+						"ce4d823d-4191-4740-a26c-6f1223878c5c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq show license pool detail w/filter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/device/licensing/pool/purchased-pool/licenses?$select=name,baseRegKey,uuid,state,state,totalDeviceLicenses&$filter=name+eq+'F5-BIG-VEP3-1G-25V13'",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"device",
+						"licensing",
+						"pool",
+						"purchased-pool",
+						"licenses"
+					],
+					"query": [
+						{
+							"key": "$select",
+							"value": "name,baseRegKey,uuid,state,state,totalDeviceLicenses"
+						},
+						{
+							"key": "$filter",
+							"value": "name+eq+'F5-BIG-VEP3-1G-25V13'"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq show license associations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/device/licensing/pool/purchased-pool/licenses?$select=name,baseRegKey,uuid,state,state,totalDeviceLicenses",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"device",
+						"licensing",
+						"pool",
+						"purchased-pool",
+						"licenses"
+					],
+					"query": [
+						{
+							"key": "$select",
+							"value": "name,baseRegKey,uuid,state,state,totalDeviceLicenses"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bigiq add managed bigip to license pool",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"deviceReference\": {\n                \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/161aee58-4a49-4d49-9f6c-50ee4082617b\"\n            }\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/device/licensing/pool/purchased-pool/licenses/ce4d823d-4191-4740-a26c-6f1223878c5c/members",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"device",
+						"licensing",
+						"pool",
+						"purchased-pool",
+						"licenses",
+						"ce4d823d-4191-4740-a26c-6f1223878c5c",
+						"members"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "bigiq add managed bigip to license pool",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"deviceReference\": {\n                \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/161aee58-4a49-4d49-9f6c-50ee4082617b\"\n            }\n}"
+						},
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/cm/device/licensing/pool/purchased-pool/licenses/ce4d823d-4191-4740-a26c-6f1223878c5c/members",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"cm",
+								"device",
+								"licensing",
+								"pool",
+								"purchased-pool",
+								"licenses",
+								"ce4d823d-4191-4740-a26c-6f1223878c5c",
+								"members"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 May 2019 12:24:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "679"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"uuid\": \"251c50ea-4411-4ed7-afda-7a215e590dec\",\n    \"deviceName\": \"bigip33.f5.com\",\n    \"deviceReference\": {\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/161aee58-4a49-4d49-9f6c-50ee4082617b\"\n    },\n    \"deviceMachineId\": \"161aee58-4a49-4d49-9f6c-50ee4082617b\",\n    \"deviceAddress\": \"192.168.200.33\",\n    \"httpsPort\": 443,\n    \"assignmentType\": \"MANAGED\",\n    \"state\": \"INSTALL\",\n    \"generation\": 1,\n    \"lastUpdateMicros\": 1557318275209600,\n    \"kind\": \"cm:device:licensing:pool:purchased-pool:licenses:licensepoolmemberstate\",\n    \"selfLink\": \"https://localhost/mgmt/cm/device/licensing/pool/purchased-pool/licenses/ce4d823d-4191-4740-a26c-6f1223878c5c/members/251c50ea-4411-4ed7-afda-7a215e590dec\"\n}"
+				}
+			]
+		},
+		{
+			"name": "bigiq refresh managed bigip license",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"state\": \"INSTALL\"\n\t\"deviceReference\": {\n                \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/161aee58-4a49-4d49-9f6c-50ee4082617b\"\n            }\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/device/licensing/pool/purchased-pool/licenses/ce4d823d-4191-4740-a26c-6f1223878c5c/members",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"device",
+						"licensing",
+						"pool",
+						"purchased-pool",
+						"licenses",
+						"ce4d823d-4191-4740-a26c-6f1223878c5c",
+						"members"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "bigiq add managed bigip to license pool",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"deviceReference\": {\n                \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/161aee58-4a49-4d49-9f6c-50ee4082617b\"\n            }\n}"
+						},
+						"url": {
+							"raw": "https://{{bigiq}}/mgmt/cm/device/licensing/pool/purchased-pool/licenses/ce4d823d-4191-4740-a26c-6f1223878c5c/members",
+							"protocol": "https",
+							"host": [
+								"{{bigiq}}"
+							],
+							"path": [
+								"mgmt",
+								"cm",
+								"device",
+								"licensing",
+								"pool",
+								"purchased-pool",
+								"licenses",
+								"ce4d823d-4191-4740-a26c-6f1223878c5c",
+								"members"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "webd"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 May 2019 12:24:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "679"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"uuid\": \"251c50ea-4411-4ed7-afda-7a215e590dec\",\n    \"deviceName\": \"bigip33.f5.com\",\n    \"deviceReference\": {\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/161aee58-4a49-4d49-9f6c-50ee4082617b\"\n    },\n    \"deviceMachineId\": \"161aee58-4a49-4d49-9f6c-50ee4082617b\",\n    \"deviceAddress\": \"192.168.200.33\",\n    \"httpsPort\": 443,\n    \"assignmentType\": \"MANAGED\",\n    \"state\": \"INSTALL\",\n    \"generation\": 1,\n    \"lastUpdateMicros\": 1557318275209600,\n    \"kind\": \"cm:device:licensing:pool:purchased-pool:licenses:licensepoolmemberstate\",\n    \"selfLink\": \"https://localhost/mgmt/cm/device/licensing/pool/purchased-pool/licenses/ce4d823d-4191-4740-a26c-6f1223878c5c/members/251c50ea-4411-4ed7-afda-7a215e590dec\"\n}"
+				}
+			]
+		},
+		{
+			"name": "bigiq revoke managed bigip license",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa52ba36-e40c-4453-9fa1-482bf5c7db31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{latest_passwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"deviceReference\": {\n                \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/161aee58-4a49-4d49-9f6c-50ee4082617b\"\n            }\n}"
+				},
+				"url": {
+					"raw": "https://{{bigiq}}/mgmt/cm/device/licensing/pool/purchased-pool/licenses/ce4d823d-4191-4740-a26c-6f1223878c5c/members",
+					"protocol": "https",
+					"host": [
+						"{{bigiq}}"
+					],
+					"path": [
+						"mgmt",
+						"cm",
+						"device",
+						"licensing",
+						"pool",
+						"purchased-pool",
+						"licenses",
+						"ce4d823d-4191-4740-a26c-6f1223878c5c",
+						"members"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
